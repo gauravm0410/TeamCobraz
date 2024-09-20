@@ -6,6 +6,7 @@ mydb = mysql.connector.connect(
   password="Arn@Ana@2897"
 )
 monthly_budget=float(input("Enter your monthly budge: "))
+daily_budget=monthly_budget/30
 mycursor = mydb.cursor()
 mycursor.execute("CREATE DATABASE IF NOT EXISTS expenseexplorer")
 mycursor.execute("USE expenseexplorer")
@@ -28,6 +29,23 @@ while True:
     y=input("Add another transaction?(y/n): ")
     if y=='n':
         break
-mycursor.execute("SELECT UNIQUE CATEGORIES from transactiontable")
-categories_data=mycursor.fetchall()
-categories_list=list(categories_data)
+    
+
+def categories_func():
+  mycursor.execute("SELECT DISTINCT category FROM transactiontable")
+  categories_data=mycursor.fetchall()
+  categories_list=list(categories_data)
+  return categories_list
+
+
+
+mycursor.execute("SELECT amt FROM transactiontable")
+amt_data=mycursor.fetchall()
+amt_list=list(amt_data)
+daily_expenditure, monthly_expenditure=0,0
+for i in amt_list:
+    daily_expenditure+=i
+monthly_expenditure+=daily_expenditure
+delta_1=daily_budget-daily_expenditure
+if delta_1<0:
+    print("WARNING!!")
