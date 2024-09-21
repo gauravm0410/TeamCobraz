@@ -1,7 +1,7 @@
 import google.generativeai as genai
 
 # Configure the Gemini API key
-genai.configure(api_key="AIzaSyCjjpCygGd_nECRyFmEwUzjpT70ZLywV68")
+genai.configure(api_key="AIzaSyB3M56MfiQwFP3MbBMStmVW5j3-DQUIrvs")
 model = genai.GenerativeModel('gemini-pro')
 
 # Predefined categories

@@ -47,33 +47,36 @@ mycursor.execute("""
     l1.append(current_date_string)
     
     tup = tuple(l1)'''
+
 amounts = []
 dates = [] 
 categories = []
 items = []
 
+
 file_path = 'extended_transaction_details.txt'
 
+if __name__ == "__main__":
 # Open and read the transaction file
-with open(file_path, 'r') as file:
-    for line in file:
-        l1 = line.strip().split(",")
-        print(l1)
-        tup=tuple(l1)
-        print(tup)
-        # Split each line by comma to extract relevant fields
-        amount, date, item, category = line.strip().split(', ')
-        
-        # Append data to the corresponding lists
-        amounts.append(int(amount))         # Convert amount to integer
-        dates.append(date)                  # Dates as strings
-        categories.append(category)         # Categories as strings
-        items.append(item)                  # Items as strings
+    with open(file_path, 'r') as file:
+        for line in file:
+            l1 = line.strip().split(",")
+            print(l1)
+            tup=tuple(l1)
+            print(tup)
+            # Split each line by comma to extract relevant fields
+            amount, date, item, category = line.strip().split(', ')
+            
+            # Append data to the corresponding lists
+            amounts.append(int(amount))         # Convert amount to integer
+            dates.append(date)                  # Dates as strings
+            categories.append(category)         # Categories as strings
+            items.append(item)                  # Items as strings
 
-    
-    sql = "INSERT INTO transactiontable(amt, transaction_date, item, category) VALUES (%s, %s, %s, %s)"
-    mycursor.execute(sql, tup)
-    mydb.commit()
+        
+            sql = "INSERT INTO transactiontable(amt, transaction_date, item, category) VALUES (%s, %s, %s, %s)"
+            mycursor.execute(sql, tup)
+        mydb.commit()
 
    
 # Route to handle form submission
@@ -94,6 +97,13 @@ def categories_func():
 def items_func():
     mycursor.execute("SELECT item, amt FROM transactiontable")
     items_data = mycursor.fetchall()
-    items_list= [item[0] for item in items_data]
-    return items_list
+    return list(items_data)
 
+
+# def giveAmount():
+#     global amounts
+#     mycurser.execute("SELECT amt FROM transactiontable")
+#     amt_data = mycursor.fetchall()
+#     for amt in amt_data:
+#         amounts.append(amt)
+#     return amounts
