@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Explorer - Home</title>
+    <!-- Google Font for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #333;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+
+        /* Hero Section with Improved Typography & Background */
+        .hero {
+            background: url('https://source.unsplash.com/1600x900/?finance,money') no-repeat center center/cover;
+            color: white;
+            padding: 150px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero h2 {
+            font-size: 3.5rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero p1 {
+            font-size: 1.34rem;
+            margin: 20px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero a {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 40px;
+            background-color: #FF5722;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .hero a:hover {
+            background-color: #e64a19;
+            transform: translateY(-5px);
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 50px 20px;
+            background-color: #fff;
+        }
+        .feature-box {
+            text-align: center;
+            max-width: 300px;
+        }
+        .feature-box img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .feature-box h3 {
+            font-size: 1.8rem;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        .feature-box p {
+            font-size: 1rem;
+            color: #555;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Hidden state */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Visible state */
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Main Section */
+        section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+        section p1 {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #f7f7f7;
+        }
+        section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .features {
+                flex-direction: column;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Expense Explorer</h1>
+    <nav>
+        <a href="index_v2.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h2>Take Control of Your Expenses</h2>
+        <p1>Track your daily expenses, get insights, and save money with ease. Expense Explorer helps you manage your finances and stay within budget.</p1><br>
+        <a href="monthly2.html">Get Started</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="feature-box">
+        <img src="https://img.icons8.com/color/96/000000/graph-report.png" alt="Reports Icon" class="hidden">
+        <h3>Real-Time Reports</h3>
+        <p class="hidden">Get detailed reports of your spending habits, helping you make smarter financial decisions.</p>
+    </div>
+    <div class="feature-box">
+        <img src="https://img.icons8.com/color/96/000000/goal.png" alt="Goals Icon" class="hidden">
+        <h3>Set Financial Goals</h3>
+        <p class="hidden">Set and track your savings goals, and watch as your financial health improves.</p>
+    </div>
+    <div class="feature-box">
+        <img src="https://img.icons8.com/color/96/000000/coin-in-hand.png" alt="Savings Icon" class="hidden">
+        <h3>Smart Savings</h3>
+        <p class="hidden">Our AI provides personalized tips to help you save more and spend wisely.</p>
+    </div>
+</section>
+
+<section>
+    <p>Expense Explorer is designed to make your financial journey smoother. Whether you're tracking your daily coffee expenses or planning your monthly budget, we provide you with the tools to see where your money goes. Our platform offers personalized advice based on your spending habits, ensuring that you make informed financial decisions. Stay updated with your financial health and watch as your savings grow over time.</p>
+</section>
+
+<footer>
+    <p>&copy; 2024 Expense Explorer. All rights reserved.</p>
+</footer>
+
+<!-- JavaScript for Scroll-Based Reveal Animation -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const featureElements = document.querySelectorAll('.feature-box img, .feature-box p');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);  // Stop observing once visible
+                }
+            });
+        }, { threshold: 0.5 });  // Adjust threshold to trigger when 50% of the element is visible
+
+        featureElements.forEach(element => {
+            observer.observe(element);
+        });
+    });
+</script>
+
+</body>
+</html>
