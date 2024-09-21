@@ -3,6 +3,7 @@ import mysql.connector
 from datetime import date
 #app = Flask(__name__)
 
+
 '''@app.route('/')
 def home():
     return render_template('index.html')'''
@@ -11,12 +12,12 @@ def home():
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Unikili@2001"
+    password="Parneeca2011"
 )
 
 # Prompt user for the budget and calculate daily and emergency budget
 monthly_budget = float(input("Enter your monthly budget: "))
-daily_budget = 0.8 * monthly_budget / 30  # 80% for daily use
+daily_budget = (monthly_budget / 30.0)*0.8 # 80% for daily use
 emergency_fund = 0.2 * monthly_budget     # 20% for emergency use
 saved_up = 0  # To track savings if expenditure is below daily budget
 
@@ -83,17 +84,27 @@ def categories_func():
 # Fetch daily expenditure and reset if the date changes
 def get_expenditure():
     current_date = date.today()
-    mycursor.execute("SELECT amt, transaction_date FROM transactiontable")
+    daily_expense = 0
+    amt_list = []
+    mycursor.execute("SELECT amt FROM transactiontable WHERE transaction_date = CURDATE()")
     amt_data = mycursor.fetchall()
-
-    daily_expenditure = sum(i[0] for i in amt_data if i[1] == current_date)  # Sum only today's transactions
-    return daily_expenditure
+    print(amt_data)
+    for i in range(len(amt_data)):
+        daily_expense += int(str(amt_data[i]))
+    # amt_list = list(amt_data)
+    # print(amt_list)
+    # for i in amt_list:
+    #     daily_expense +=i
+    
+    return daily_expense
 
 # Main budget checking logic
 def check_budget():
     global saved_up, emergency_fund
     daily_expenditure = get_expenditure()
     delta_1 = daily_budget - daily_expenditure
+    print(f"daily expenditure : {daily_expenditure}")
+    print(f"delta = {delta_1}")
     
     # If the person spends less than the daily budget
     if delta_1 > 0:
@@ -135,9 +146,9 @@ def check_budget():
 # Function to gradually adjust the daily budget
 def adjust_budget():
     global daily_budget
-    increment = 0.05 * daily_budget  # Increase daily budget by 5%
-    daily_budget += increment
-    print(f"Daily budget has been increased by 5%. New daily budget: {daily_budget}")
+    dencrement = 0.05 * daily_budget  # Increase daily budget by 5%
+    daily_budget -= dencrement
+    print(f"Daily budget has been dencreased by 5%. New daily budget: {daily_budget}")
 
 # Run budget check
 check_budget()
