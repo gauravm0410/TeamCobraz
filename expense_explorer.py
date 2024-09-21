@@ -24,7 +24,7 @@ mycursor.execute("CREATE DATABASE IF NOT EXISTS expenseexplorer")
 mycursor.execute("USE expenseexplorer")
 mycursor.execute("""
     CREATE TABLE IF NOT EXISTS transactiontable(
-        transid INT AUTO_INCREMENT PRIMARY KEY, 
+        transid VARCHAR(255) PRIMARY KEY, 
         category VARCHAR(255), 
         amt DOUBLE(10,2), 
         item VARCHAR(255), 
