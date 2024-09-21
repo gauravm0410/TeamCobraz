@@ -24,7 +24,7 @@ mycursor.execute("CREATE DATABASE IF NOT EXISTS expenseexplorer")
 mycursor.execute("USE expenseexplorer")
 mycursor.execute("""
     CREATE TABLE IF NOT EXISTS transactiontable(
-        transid VARCHAR(255) PRIMARY KEY, 
+        transid INT PRIMARY KEY, 
         category VARCHAR(255), 
         amt DOUBLE(10,2), 
         item VARCHAR(255), 
@@ -68,7 +68,7 @@ with open(file_path, 'r') as file:
         # Append data to the corresponding lists
         amounts.append(int(amount))         # Convert amount to integer
         dates.append(date)                  # Dates as strings
-        transaction_ids.append(txn_id)      # Store only transaction ID
+        transaction_ids.append(int(txn_id) )     # Store only transaction ID
         categories.append(category)         # Categories as strings
         items.append(item)                  # Items as strings
 
