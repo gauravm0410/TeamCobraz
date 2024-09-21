@@ -5,7 +5,7 @@
 
 import google.generativeai as genai
 import os
-import expense_explorer.py
+from expense_explorer import *
 
 # Configure the Gemini API key
 genai.configure(api_key="AIzaSyCjjpCygGd_nECRyFmEwUzjpT70ZLywV68")
@@ -57,5 +57,5 @@ def nonEssentialCategory():
 
     return non_essential
 
-print(essentialCategory())
-print(nonEssentialCategory())
+print(f"essential category : {essentialCategory()}")
+print(f"non essential category : {nonEssentialCategory()}")

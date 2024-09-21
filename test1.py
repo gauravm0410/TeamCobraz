@@ -67,40 +67,5 @@ def essentialCategory():
 
     prompt = "Give only essential expenses and give output without any special characters and unnecessary information: " + ', '.join(category_items)
 
-    # Send the prompt to the model and collect the full response
-    response = chat.send_message(prompt, stream=True)
-
-    output_text = ""
-    for chunk in response:
-        if hasattr(chunk, 'text') and chunk.text:
-            output_text += chunk.text.lower()
-
-    # Process the response and split into essential items
-    lines = output_text.split("\n")
-    for line in lines:
-        line = line.strip()
-        if line and line in category_items:
-            # Add the category and its items to the essential_categories dictionary
-            essential_categories[line] = category_items[line]  # Assign the entire dictionary of items and costs
-    print(essential_categories)
-    return essential_categories
-
-essentialCategory()
-
-def createEssentialsDictionary():
-    """
-    Function to create an essentials dictionary.
-    Each key is the category name, and each value is a dictionary of items and their respective costs.
-    """
-    essentials_dict = {}
-
-    # Get the essential categories using the existing essentialCategory() function
-    essential_categories = essentialCategory()  # This function should return a dictionary of essentials
-
-    for category, items in essential_categories.items():
-        # Create a new entry in the essentials_dict for each category
-        essentials_dict[category] = items  # 'items' is already a dictionary of item names and costs
-    print(f"essential dictionary is : {essentials_dict}")
-    return essentials_dict
 
 createEssentialsDictionary()
