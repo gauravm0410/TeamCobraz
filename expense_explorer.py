@@ -1,14 +1,9 @@
 
 import mysql.connector
 from datetime import date
+from collections import defaultdict
 
 
-<<<<<<< HEAD
-=======
-'''@app.route('/')
-def home():
-    return render_template('index.html')'''
->>>>>>> 918dafc0d49b6d67be18e6da99ec07ed760d547d
 
 # Connect to MySQL
 mydb = mysql.connector.connect(
@@ -93,66 +88,7 @@ def categories_func():
     return categories_list
 
 # Fetch daily expenditure and reset if the date changes
-def get_expenditure():
-    current_date = date.today()
-    mycursor.execute("SELECT amt, transaction_date FROM transactiontable")
-    amt_data = mycursor.fetchall()
 
-    daily_expenditure = sum(i[0] for i in amt_data if i[1] == current_date)  # Sum only today's transactions
-    return daily_expenditure
-
-# Main budget checking logic
-def check_budget():
-    global saved_up, emergency_fund
-    daily_expenditure = get_expenditure()
-    delta_1 = daily_budget - daily_expenditure
-    
-    # If the person spends less than the daily budget
-    if delta_1 > 0:
-        saved_up += delta_1  # Add the remaining budget to the savings
-        print("Good job! You saved:", delta_1)
-        print("Total saved up amount:", saved_up)
-    else:
-        print("WARNING! You have exceeded your daily budget.")
-        delta_exceed = abs(delta_1)
-        
-        if delta_exceed > 2 * daily_budget:  # If exceeds more than twice the budget
-            print(f"Warning: You have exceeded your daily budget by more than twice!")
-            choice = input("Is this a one-time transaction? (y/n): ")
-            
-            if choice.lower() == 'y':
-                print("Overflow warning will show until saved-up amount covers the excess.")
-            else:
-                # Handle emergency fund usage
-                if delta_exceed <= emergency_fund:
-                    use_emergency = input("Do you want to cover the difference with your emergency fund? (y/n): ")
-                    if use_emergency.lower() == 'y':
-                        emergency_fund -= delta_exceed
-                        print(f"Covered by emergency fund. Remaining emergency fund: {emergency_fund}")
-                    else:
-                        print("Overflow warning remains.")
-                else:
-                    print("Your emergency fund is insufficient to cover this.")
-                    empty_emergency = input("Do you want to empty the emergency fund? (y/n): ")
-                    if empty_emergency.lower() == 'y':
-                        delta_exceed -= emergency_fund
-                        emergency_fund = 0
-                        print(f"Emergency fund emptied. Remaining excess: {delta_exceed}")
-                        choice = input("Is this a one-time transaction? (y/n): ")
-                        if choice.lower() == 'n':
-                            adjust_budget()  # Gradually increase the daily budget
-                        else:
-                            print("Overflow warning will show until saved-up amount covers the excess.")
-
-# Function to gradually adjust the daily budget
-def adjust_budget():
-    global daily_budget
-    dencrement = 0.05 * daily_budget  # Increase daily budget by 5%
-    daily_budget -= dencrement
-    print(f"Daily budget has been dencreased by 5%. New daily budget: {daily_budget}")
-
-# Run budget check
-check_budget()
 
 '''if __name__ == '__main__':
     app.run(debug=True, port=5050)'''
