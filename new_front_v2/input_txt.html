@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text File Upload</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffffff, #3c9aa1);
+            margin: 0;
+        }
+
+        header {
+            background-color: #383232;
+            color: rgb(41, 164, 176);
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            position: absolute;
+            top: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        .upload-container {
+            padding: 40px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        input[type="file"] {
+            padding: 12px;
+            font-size: 16px;
+            margin: 20px 0;
+            border: 2px solid  #3c9aa1;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            border-color: #3c9aa1;
+        }
+
+        .btn-submit {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #3c9aa1;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #3c9aa1;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Expense Explorer</h1>
+    </header>
+
+    <div class="container">
+        <div class="upload-container">
+            <h2>Upload a Text File</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="textfile" accept=".txt" required>
+                <button type="submit" class="btn-submit">Upload</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
