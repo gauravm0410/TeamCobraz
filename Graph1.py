@@ -5,26 +5,21 @@ import plotly.graph_objects as go
 import cufflinks as cf
 import matplotlib
 
-def tuple_to_list(nested_tuple):
-    """Convert a nested tuple to a nested list."""
-    if isinstance(nested_tuple, tuple):
-        return [tuple_to_list(item) for item in nested_tuple]
-    return nested_tuple  # Base case: return the item if it's not a tuple
-
-# Example usage:
-nested_tuple = ((1, 2), (3, (4, 5)), (6,))
-nested_list = tuple_to_list(nested_tuple)
-print(nested_list)
-
-
-
 # Set the backend to TkAgg to open plots in separate windows
 matplotlib.use('TkAgg')
+#Get output of prv program as the input of this one
+oma=len(amounts)
+nested_list=[]
+small_list=[]
 
+for i in range(0,oma):
+    small_list.append(dates[i])
+    small_list.append(categories[i])
+    small_list.append(amounts[i])
+    nested_list.append(small_list)
 # Enable cufflinks for offline mode
 cf.go_offline()
-tupple=()
-nested_listt=tuple_to_list(tupple)
+'''
 # Nested list with expense data: [Date, Category, Amount]
 nested_list = [
     ['2024-01-01', 'Food', 50],
@@ -35,7 +30,7 @@ nested_list = [
     ['2024-01-06', 'Food', 60],
     ['2024-01-07', 'Transport', 30]
 ]
-
+'''
 # Step 1: Create the DataFrame and specify column names
 df = pd.DataFrame(nested_list, columns=['Date', 'Category', 'Amount'])
 
@@ -60,7 +55,10 @@ plt.show()  # Ensures the pie chart is displayed
 df['DayOfMonth'] = df['Date'].dt.day
 df['MonthNum'] = df['Date'].dt.month
 
-daily_spending = df.groupby(['DayOfMonth', 'MonthNum']).sum(numeric_only=True).reset_index()
+# Group by DayOfMonth and MonthNum, summing the 'Amount' for duplicate dates
+daily_spending = df.groupby(['DayOfMonth', 'MonthNum'], as_index=False).agg({'Amount': 'sum'})
+
+# Plot the updated bar chart
 plt.figure(figsize=(10, 6))
 sns.barplot(x='DayOfMonth', y='Amount', hue='MonthNum', data=daily_spending)
 plt.title('Amount of Money Spent per Day in a Month')
@@ -91,11 +89,12 @@ plt.figure(figsize=(10, 6))
 sns.heatmap(heatmap_data, annot=True, cmap='coolwarm')
 plt.title('Spending Intensity by Category and Day of the Week')
 plt.show()  # Ensures the heat map is displayed
-
-# --- Radar Chart: Compare multiple categories ---
+print("Ceawoireh")
+'''# --- Radar Chart: Compare multiple categories ---
 categories = category_group['Category']
 amounts = category_group['Amount']
 fig = go.Figure()
 fig.add_trace(go.Scatterpolar(r=amounts, theta=categories, fill='toself'))
 fig.update_layout(polar=dict(radialaxis=dict(visible=True)), showlegend=False, title="Spending Comparison Across Categories")
 fig.show()  # Ensures the radar chart is displayed
+'''
