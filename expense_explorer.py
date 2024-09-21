@@ -3,17 +3,23 @@ import mysql.connector
 from datetime import date
 
 
+<<<<<<< HEAD
+=======
+'''@app.route('/')
+def home():
+    return render_template('index.html')'''
+>>>>>>> 918dafc0d49b6d67be18e6da99ec07ed760d547d
 
 # Connect to MySQL
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Unikili@2001"
+    password="Parneeca2011"
 )
 
 # Prompt user for the budget and calculate daily and emergency budget
 monthly_budget = float(input("Enter your monthly budget: "))
-daily_budget = 0.8 * monthly_budget / 30  # 80% for daily use
+daily_budget = (monthly_budget / 30.0)*0.8 # 80% for daily use
 emergency_fund = 0.2 * monthly_budget     # 20% for emergency use
 saved_up = 0  # To track savings if expenditure is below daily budget
 
@@ -141,9 +147,9 @@ def check_budget():
 # Function to gradually adjust the daily budget
 def adjust_budget():
     global daily_budget
-    increment = 0.05 * daily_budget  # Increase daily budget by 5%
-    daily_budget += increment
-    print(f"Daily budget has been increased by 5%. New daily budget: {daily_budget}")
+    dencrement = 0.05 * daily_budget  # Increase daily budget by 5%
+    daily_budget -= dencrement
+    print(f"Daily budget has been dencreased by 5%. New daily budget: {daily_budget}")
 
 # Run budget check
 check_budget()

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Explorer - Track Your Expenses</title>
+    <script type="text/javascript" src="result.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        h1, h2 {
+            margin: 0;
+            padding-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        .add-category-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .add-category-container input {
+            width: 70%;
+        }
+        .add-category-container button {
+            width: 25%;
+        }
+        button:hover {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .track-expense-btn {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.2rem;
+        }
+    </style>
+    <script>
+        // Retrieve the value from local storage
+        let storedValue = localStorage.getItem('storedValue');
+        // Display the value on the page
+        document.getElementById('outputValue').innerText = storedValue;
+        document.addEventListener("DOMContentLoaded", function() {
+            const categorySelect = document.getElementById("category");
+            const addCategoryInput = document.getElementById("new-category");
+            const addCategoryBtn = document.getElementById("add-category-btn");
+
+            addCategoryBtn.addEventListener("click", function() {
+                const newCategory = addCategoryInput.value.trim();
+                if (newCategory) {
+                    const option = document.createElement("option");
+                    option.text = newCategory;
+                    option.value = newCategory.toLowerCase();
+                    categorySelect.add(option);
+                    addCategoryInput.value = "";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Expense Explorer</h1>
+</header>
+
+<div class="container">
+    <h2>Your Monthly Budget: <p id="Budget-paste"></p></h2>
+    <!--<label for="monthly-budget">Your monthly budget: </label>-->
+    <!--<input type="number" id="monthly-budget" placeholder="Enter your budget" required> -->
+
+    <h2>Add Your Expense</h2>
+    <label for="amount">Enter the amount spent:</label>
+    <input type="number" id="amount" placeholder="Amount spent" required>
+
+    <label for="category">Select category:</label>
+    <select id="category" required>
+        <option value="" disabled selected>Select category</option>
+        <option value="groceries">Groceries</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="utilities">Utilities</option>
+        <option value="transport">Transport</option>
+        <option value="health">Health</option>
+    </select>
+
+    <div class="add-category-container">
+        <input type="text" id="new-category" placeholder="Add new category">
+        <button id="add-category-btn">Add Category</button>
+    </div>
+
+    <button class="track-expense-btn">Track Expense</button>
+    <a href="index_v2.html">
+        <button class="home-btn">Home</button>
+    </a>
+</div>
+
+</body>
+</html>
