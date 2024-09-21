@@ -150,3 +150,4 @@ def items_func():
     items_data = mycursor.fetchall()
     items_list= [item[0] for item in items_data]
     return items_list
+
