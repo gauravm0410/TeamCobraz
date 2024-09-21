@@ -5,12 +5,13 @@
 
 import google.generativeai as genai
 import os
+import expense_explorer.py
 
 # Configure the Gemini API key
 genai.configure(api_key="AIzaSyCjjpCygGd_nECRyFmEwUzjpT70ZLywV68")
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-pro')
 
-categories = [ "rent", "food", "shopping", "netflix"]
+categories = categories_func()
 
 essential = []
 non_essential = []
