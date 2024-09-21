@@ -1,11 +1,17 @@
+from flask import Flask, render_template, request, redirect
 import mysql.connector
 from datetime import date
+#app = Flask(__name__)
+
+'''@app.route('/')
+def home():
+    return render_template('index.html')'''
 
 # Connect to MySQL
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Arn@Ana@2897"
+    password="Unikili@2001"
 )
 
 # Prompt user for the budget and calculate daily and emergency budget
@@ -51,7 +57,22 @@ while True:
     y = input("Add another transaction? (y/n): ")
     if y.lower() == 'n':
         break
-
+# Route to handle form submission
+'''@app.route('/add_expense', methods=['POST'])
+def add_expense():
+    category = request.form['category']
+    item = request.form['item']
+    amount = float(request.form['amount'])  # Convert string to float
+    
+    query = "INSERT INTO transactiontable (category, item, amt, transaction_date) VALUES (%s, %s, %s, %s)"
+    values = (category, item, amount, date.today())  # Insert today's date
+    
+    mycursor = mydb.cursor()  # Ensure new cursor for each request
+    mycursor.execute(query, values)
+    mydb.commit()
+    
+    return redirect('/')
+'''
 # Function to get distinct categories
 def categories_func():
     mycursor.execute("SELECT DISTINCT category FROM transactiontable")
@@ -120,3 +141,7 @@ def adjust_budget():
 
 # Run budget check
 check_budget()
+
+'''if __name__ == '__main__':
+    app.run(debug=True, port=5050)'''
+
