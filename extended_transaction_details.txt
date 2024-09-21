@@ -1,0 +1,15 @@
+100, 2024-09-25, Snacks, Food
+2500, 2024-09-26, Headphones, Electronics
+1200, 2024-09-27, Concert Ticket, Entertainment
+300, 2024-09-28, Book, Education
+1800, 2024-09-29, Jacket, Clothing
+700, 2024-09-30, Dinner, Food
+1000, 2024-10-01, Gym Membership, Health
+450, 2024-10-02, Coffee, Food
+2200, 2024-10-03, Laptop Stand, Electronics
+1300, 2024-10-04, Sneakers, Clothing
+650, 2024-10-05, Museum Ticket, Entertainment
+300, 2024-10-06, Breakfast, Food
+900, 2024-10-07, Online Course, Education
+400, 2024-10-08, Movie Rental, Entertainment
+5500, 2024-10-09, Tablet, Electronics

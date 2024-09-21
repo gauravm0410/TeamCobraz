@@ -1,12 +1,9 @@
-from flask import Flask, render_template, request, redirect
+
 import mysql.connector
 from datetime import date
-#app = Flask(__name__)
+from collections import defaultdict
 
 
-'''@app.route('/')
-def home():
-    return render_template('index.html')'''
 
 # Connect to MySQL
 mydb = mysql.connector.connect(
@@ -31,12 +28,12 @@ mycursor.execute("""
         category VARCHAR(255), 
         amt DOUBLE(10,2), 
         item VARCHAR(255), 
-        transaction_date DATE
+        transaction_date VARCHAR(255)
     )
 """)
 
 # Function to insert transactions
-while True:
+'''while True:
     l1 = []  # Reset the list for every transaction
     cat = input("Enter category of expenditure: ")
     amount = float(input("Enter cost of purchase: "))
@@ -49,31 +46,38 @@ while True:
     l1.append(item)
     l1.append(current_date_string)
     
-    tup = tuple(l1)
+    tup = tuple(l1)'''
+amounts = []
+dates = [] 
+categories = []
+items = []
+
+file_path = 'extended_transaction_details.txt'
+
+# Open and read the transaction file
+with open(file_path, 'r') as file:
+    for line in file:
+        l1 = line.strip().split(",")
+        print(l1)
+        tup=tuple(l1)
+        print(tup)
+        # Split each line by comma to extract relevant fields
+        amount, date, item, category = line.strip().split(', ')
+        
+        # Append data to the corresponding lists
+        amounts.append(int(amount))         # Convert amount to integer
+        dates.append(date)                  # Dates as strings
+        categories.append(category)         # Categories as strings
+        items.append(item)                  # Items as strings
+
     
-    sql = "INSERT INTO transactiontable(category, amt, item, transaction_date) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO transactiontable(amt, transaction_date, item, category) VALUES (%s, %s, %s, %s)"
     mycursor.execute(sql, tup)
     mydb.commit()
 
-    y = input("Add another transaction? (y/n): ")
-    if y.lower() == 'n':
-        break
+   
 # Route to handle form submission
-'''@app.route('/add_expense', methods=['POST'])
-def add_expense():
-    category = request.form['category']
-    item = request.form['item']
-    amount = float(request.form['amount'])  # Convert string to float
-    
-    query = "INSERT INTO transactiontable (category, item, amt, transaction_date) VALUES (%s, %s, %s, %s)"
-    values = (category, item, amount, date.today())  # Insert today's date
-    
-    mycursor = mydb.cursor()  # Ensure new cursor for each request
-    mycursor.execute(query, values)
-    mydb.commit()
-    
-    return redirect('/')
-'''
+
 # Function to get distinct categories
 def categories_func():
     mycursor.execute("SELECT DISTINCT category FROM transactiontable")
@@ -82,76 +86,7 @@ def categories_func():
     return categories_list
 
 # Fetch daily expenditure and reset if the date changes
-def get_expenditure():
-    current_date = date.today()
-    daily_expense = 0
-    amt_list = []
-    mycursor.execute("SELECT amt FROM transactiontable WHERE transaction_date = CURDATE()")
-    amt_data = mycursor.fetchall()
-    print(amt_data)
-    for i in range(len(amt_data)):
-        daily_expense += int(str(amt_data[i]))
-    # amt_list = list(amt_data)
-    # print(amt_list)
-    # for i in amt_list:
-    #     daily_expense +=i
-    
-    return daily_expense
 
-# Main budget checking logic
-def check_budget():
-    global saved_up, emergency_fund
-    daily_expenditure = get_expenditure()
-    delta_1 = daily_budget - daily_expenditure
-    print(f"daily expenditure : {daily_expenditure}")
-    print(f"delta = {delta_1}")
-    
-    # If the person spends less than the daily budget
-    if delta_1 > 0:
-        saved_up += delta_1  # Add the remaining budget to the savings
-        print("Good job! You saved:", delta_1)
-        print("Total saved up amount:", saved_up)
-    else:
-        print("WARNING! You have exceeded your daily budget.")
-        delta_exceed = abs(delta_1)
-        
-        if delta_exceed > 2 * daily_budget:  # If exceeds more than twice the budget
-            print(f"Warning: You have exceeded your daily budget by more than twice!")
-            choice = input("Is this a one-time transaction? (y/n): ")
-            
-            if choice.lower() == 'y':
-                print("Overflow warning will show until saved-up amount covers the excess.")
-            else:
-                # Handle emergency fund usage
-                if delta_exceed <= emergency_fund:
-                    use_emergency = input("Do you want to cover the difference with your emergency fund? (y/n): ")
-                    if use_emergency.lower() == 'y':
-                        emergency_fund -= delta_exceed
-                        print(f"Covered by emergency fund. Remaining emergency fund: {emergency_fund}")
-                    else:
-                        print("Overflow warning remains.")
-                else:
-                    print("Your emergency fund is insufficient to cover this.")
-                    empty_emergency = input("Do you want to empty the emergency fund? (y/n): ")
-                    if empty_emergency.lower() == 'y':
-                        delta_exceed -= emergency_fund
-                        emergency_fund = 0
-                        print(f"Emergency fund emptied. Remaining excess: {delta_exceed}")
-                        choice = input("Is this a one-time transaction? (y/n): ")
-                        if choice.lower() == 'n':
-                            adjust_budget()  # Gradually increase the daily budget
-                        else:
-                            print("Overflow warning will show until saved-up amount covers the excess.")
-
-# Function to gradually adjust the daily budget
-def adjust_budget():
-    global daily_budget
-    dencrement = 0.05 * daily_budget  # Increase daily budget by 5%
-    daily_budget -= dencrement
-    print(f"Daily budget has been dencreased by 5%. New daily budget: {daily_budget}")
-
-# Run budget check
-check_budget()
 
 '''if __name__ == '__main__':
     app.run(debug=True, port=5050)'''
