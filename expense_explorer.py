@@ -84,27 +84,17 @@ def categories_func():
 # Fetch daily expenditure and reset if the date changes
 def get_expenditure():
     current_date = date.today()
-    daily_expense = 0
-    amt_list = []
-    mycursor.execute("SELECT amt FROM transactiontable WHERE transaction_date = CURDATE()")
+    mycursor.execute("SELECT amt, transaction_date FROM transactiontable")
     amt_data = mycursor.fetchall()
-    print(amt_data)
-    for i in range(len(amt_data)):
-        daily_expense += int(str(amt_data[i]))
-    # amt_list = list(amt_data)
-    # print(amt_list)
-    # for i in amt_list:
-    #     daily_expense +=i
-    
-    return daily_expense
+
+    daily_expenditure = sum(i[0] for i in amt_data if i[1] == current_date)  # Sum only today's transactions
+    return daily_expenditure
 
 # Main budget checking logic
 def check_budget():
     global saved_up, emergency_fund
     daily_expenditure = get_expenditure()
     delta_1 = daily_budget - daily_expenditure
-    print(f"daily expenditure : {daily_expenditure}")
-    print(f"delta = {delta_1}")
     
     # If the person spends less than the daily budget
     if delta_1 > 0:
