@@ -28,3 +28,5 @@ while True:
 mycursor.execute("SELECT * from transactiontable")
 data=mycursor.fetchall()
 data2=list(data)
+
+

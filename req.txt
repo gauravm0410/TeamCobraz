@@ -1,0 +1,5 @@
+beautifulsoup4==4.12.3
+google==3.0.0
+mysql==0.0.3
+mysqlclient==2.2.4
+soupsieve==2.6
