@@ -28,7 +28,7 @@ mycursor.execute("""
         category VARCHAR(255), 
         amt DOUBLE(10,2), 
         item VARCHAR(255), 
-        transaction_date DATE
+        transaction_date VARCHAR(255)
     )
 """)
 
