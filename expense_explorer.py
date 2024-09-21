@@ -1,11 +1,8 @@
-from flask import Flask, render_template, request, redirect
+
 import mysql.connector
 from datetime import date
-#app = Flask(__name__)
 
-'''@app.route('/')
-def home():
-    return render_template('index.html')'''
+
 
 # Connect to MySQL
 mydb = mysql.connector.connect(
@@ -35,7 +32,7 @@ mycursor.execute("""
 """)
 
 # Function to insert transactions
-while True:
+'''while True:
     l1 = []  # Reset the list for every transaction
     cat = input("Enter category of expenditure: ")
     amount = float(input("Enter cost of purchase: "))
@@ -48,31 +45,40 @@ while True:
     l1.append(item)
     l1.append(current_date_string)
     
-    tup = tuple(l1)
+    tup = tuple(l1)'''
+amounts = []
+dates = []
+transaction_ids = [] 
+categories = []
+items = []
+
+file_path = 'extended_transaction_details.txt'
+
+# Open and read the transaction file
+with open(file_path, 'r') as file:
+    for line in file:
+        l1 = line.strip().split(",")
+        print(l1)
+        tup=tuple(l1)
+        print(tup)
+        # Split each line by comma to extract relevant fields
+        txn_id, amount, date, item, category = line.strip().split(', ')
+        
+        # Append data to the corresponding lists
+        amounts.append(int(amount))         # Convert amount to integer
+        dates.append(date)                  # Dates as strings
+        transaction_ids.append(txn_id)      # Store only transaction ID
+        categories.append(category)         # Categories as strings
+        items.append(item)                  # Items as strings
+
     
-    sql = "INSERT INTO transactiontable(category, amt, item, transaction_date) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO transactiontable(transid, amt, transaction_date, item, category) VALUES (%s, %s, %s, %s, %s)"
     mycursor.execute(sql, tup)
     mydb.commit()
 
-    y = input("Add another transaction? (y/n): ")
-    if y.lower() == 'n':
-        break
+   
 # Route to handle form submission
-'''@app.route('/add_expense', methods=['POST'])
-def add_expense():
-    category = request.form['category']
-    item = request.form['item']
-    amount = float(request.form['amount'])  # Convert string to float
-    
-    query = "INSERT INTO transactiontable (category, item, amt, transaction_date) VALUES (%s, %s, %s, %s)"
-    values = (category, item, amount, date.today())  # Insert today's date
-    
-    mycursor = mydb.cursor()  # Ensure new cursor for each request
-    mycursor.execute(query, values)
-    mydb.commit()
-    
-    return redirect('/')
-'''
+
 # Function to get distinct categories
 def categories_func():
     mycursor.execute("SELECT DISTINCT category FROM transactiontable")

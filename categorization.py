@@ -2,16 +2,15 @@
 # and we will also have pre defined categories already in the list
 # THOROUGH TESTING IS NEEDED IN THIS CATEGORIZATION check all weird kind of inputs
 
-
 import google.generativeai as genai
 import os
-import expense_explorer.py
+import expense_explorer
 
 # Configure the Gemini API key
 genai.configure(api_key="AIzaSyCjjpCygGd_nECRyFmEwUzjpT70ZLywV68")
 model = genai.GenerativeModel('gemini-pro')
 
-categories = categories_func()
+categories = expense_explorer.categories_func
 
 essential = []
 non_essential = []
