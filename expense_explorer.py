@@ -24,7 +24,7 @@ mycursor.execute("CREATE DATABASE IF NOT EXISTS expenseexplorer")
 mycursor.execute("USE expenseexplorer")
 mycursor.execute("""
     CREATE TABLE IF NOT EXISTS transactiontable(
-        transid INT PRIMARY KEY, 
+        transid INT AUTO_INCREMENT PRIMARY KEY, 
         category VARCHAR(255), 
         amt DOUBLE(10,2), 
         item VARCHAR(255), 
@@ -48,8 +48,7 @@ mycursor.execute("""
     
     tup = tuple(l1)'''
 amounts = []
-dates = []
-transaction_ids = [] 
+dates = [] 
 categories = []
 items = []
 
@@ -63,17 +62,16 @@ with open(file_path, 'r') as file:
         tup=tuple(l1)
         print(tup)
         # Split each line by comma to extract relevant fields
-        txn_id, amount, date, item, category = line.strip().split(', ')
+        amount, date, item, category = line.strip().split(', ')
         
         # Append data to the corresponding lists
         amounts.append(int(amount))         # Convert amount to integer
         dates.append(date)                  # Dates as strings
-        transaction_ids.append(int(txn_id) )     # Store only transaction ID
         categories.append(category)         # Categories as strings
         items.append(item)                  # Items as strings
 
     
-    sql = "INSERT INTO transactiontable(transid, amt, transaction_date, item, category) VALUES (%s, %s, %s, %s, %s)"
+    sql = "INSERT INTO transactiontable(amt, transaction_date, item, category) VALUES (%s, %s, %s, %s)"
     mycursor.execute(sql, tup)
     mydb.commit()
 
