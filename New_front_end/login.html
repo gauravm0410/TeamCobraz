@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login and Signup for Expense Explorer.">
+    <title>Login & Signup - Expense Explorer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        label {
+            margin-bottom: 5px;
+            display: block;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .toggle {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .toggle a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .back-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Expense Explorer</h1>
+</header>
+
+<div class="container" id="form-container">
+    <h2 id="form-title">Sign Up</h2>
+    <form id="signup-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Sign Up</button>
+    </form>
+    <div class="toggle">
+        Already have an account? <a href="#" id="show-login">Log In</a>
+    </div>
+    <a href="index_v2.html" class="back-button">Back</a> <!-- Back button -->
+</div>
+
+<div class="container" id="login-container" style="display: none;">
+    <h2>Log In</h2>
+    <form id="login-form">
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" name="email" required>
+
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" name="password" required>
+
+        <button type="submit">Log In</button>
+    </form>
+    <div class="toggle">
+        Don't have an account? <a href="#" id="show-signup">Sign Up</a>
+    </div>
+    <a href="index_v2.html" class="back-button">Back</a> <!-- Back button -->
+</div>
+
+<footer>
+    <p>&copy; 2024 Expense Explorer. All rights reserved.</p>
+</footer>
+
+<script>
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('Sign Up successful! Welcome, ' + document.getElementById('name').value);
+    this.reset(); // Clear the form fields after submission
+});
+
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('Login successful!');
+    this.reset(); // Clear the form fields after submission
+});
+
+// Show login form
+document.getElementById('show-login').addEventListener('click', function() {
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('login-container').style.display = 'block';
+});
+
+// Show signup form
+document.getElementById('show-signup').addEventListener('click', function() {
+    document.getElementById('login-container').style.display = 'none';
+    document.getElementById('form-container').style.display = 'block';
+});
+</script>
+
+</body>
+</html>

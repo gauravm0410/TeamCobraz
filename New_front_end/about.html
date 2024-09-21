@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about Expense Explorer, a financial management platform offering easy expense tracking and smart insights.">
+    <title>About Us - Expense Explorer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #4CAF50;
+        }
+        p, ul {
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        p.visible, ul.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            background: url('checkmark.png') no-repeat left;
+            padding-left: 25px;
+            margin: 10px 0;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+            text-align: left;
+            position: relative;
+        }
+        .back-button::before {
+            content: "←";
+            position: absolute;
+            left: -20px;
+        }
+        .back-button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to Expense Explorer</h1>
+</header>
+
+<section>
+    <h2>About Us</h2>
+    <p>At <strong>Expense Explorer</strong>, we believe that managing finances should be simple, transparent, and empowering for everyone. Whether you're an individual trying to track your personal budget or a business aiming for optimized expense management, our platform offers intuitive tools to help you stay in control of your finances.</p>
+
+    <h3>Our Mission</h3>
+    <p>Our mission is to make financial tracking easier and more accessible for people and businesses. By offering user-friendly dashboards, automated expense categorization, and real-time insights, we aim to eliminate the stress associated with budgeting and managing costs.</p>
+
+    <h3>What We Offer</h3>
+    <ul>
+        <li><strong>Easy Expense Tracking</strong>: Record your expenses with just a few clicks and gain a clear understanding of your spending.</li>
+        <li><strong>Comprehensive Reports</strong>: Generate detailed reports to see the bigger picture and optimize your financial strategy.</li>
+        <li><strong>Smart Alerts</strong>: Receive personalized alerts when unusual spending occurs or when you're nearing your budget limits.</li>
+        <li><strong>Secure and Private</strong>: We ensure the safety of your data with secure encryption and privacy-focused features.</li>
+    </ul>
+
+    <h3>Why Choose Expense Explorer?</h3>
+    <p>We’re not just a financial tool – we’re a team of passionate individuals dedicated to simplifying how you manage your expenses. Our goal is to help you make smarter decisions with your money so you can focus on the things that matter most.</p>
+
+    <h3>Meet the Team</h3>
+    <ul>
+        <li><strong>Arnav Kale </strong>- Front End And Back End</li>
+        <li><strong>Parneeca Mahale </strong>- Back End</li>
+        <li><strong>Gaurav Mundra</strong> - Back End</li>
+        <li><strong>Bhanu Mahesh Chekuri </strong>- Front End</li>
+    </ul>
+
+    <h3>Our Vision</h3>
+    <p>We’re here to revolutionize the way individuals and businesses think about expenses. By combining cutting-edge technology with a commitment to simplicity, we aim to become the go-to solution for financial management worldwide.</p>
+
+    <!-- Back Button -->
+    <a href="index_v2.html" class="back-button">Back</a>
+</section>
+
+<footer>
+    <p>&copy; 2024 Expense Explorer. All rights reserved.</p>
+</footer>
+
+<!-- JavaScript for Scroll-Based Reveal Animation -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const paragraphs = document.querySelectorAll('p, ul');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);  // Stop observing once visible
+                }
+            });
+        }, { threshold: 0.5 });  // Adjust threshold to trigger when 50% of the element is visible
+
+        paragraphs.forEach(p => {
+            observer.observe(p);
+        });
+    });
+</script>
+
+</body>
+</html>
+
